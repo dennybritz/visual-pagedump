@@ -1,0 +1,19 @@
+{
+  "name": "visualcrawler",
+  "version": "0.1.0",
+  "description": "Crawling API that generates visual sitemaps.",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Denny Britz",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.0.6",
+    "lodash": "^3.10.1",
+    "webdriverio": "^3.3.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.4"
+  }
+}
