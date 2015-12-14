@@ -4,7 +4,7 @@
   "description": "Crawling API that generates visual sitemaps.",
   "main": "app.js",
   "scripts": {
-    "test": "mocha"
+    "test": "node --harmony_destructuring ./node_modules/.bin/_mocha"
   },
   "author": "Denny Britz",
   "license": "ISC",
@@ -14,6 +14,10 @@
     "webdriverio": "^3.3.0"
   },
   "devDependencies": {
-    "mocha": "^2.3.4"
+    "chai": "^3.4.1",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^2.0.0",
+    "mocha": "^2.3.4",
+    "sinon": "^1.17.2"
   }
 }
