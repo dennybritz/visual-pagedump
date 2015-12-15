@@ -1,3 +1,5 @@
+'use strict';
+
 const _ = require('lodash');
 const Promise = require('bluebird');
 const expect = require('chai').expect;
@@ -68,10 +70,10 @@ describe('ActionCrawler', () => {
         test2: () => Promise.resolve('Success2!'),
       };
       const ac = new ActionCrawler(mockClient);
-      ac.registerAction('test1', client => client.test1());
-      ac.registerAction('test2', client => client.test2());
-      ac.enqueue('test1');
-      ac.enqueue('test2');
+      ac
+        .registerAction('test1', client => client.test1())
+        .registerAction('test2', client => client.test2());
+      ac.enqueue('test1').enqueue('test2');
       return ac.runAsync().then(res => {
         expect(res.pop()).to.match(/Success2!/);
         expect(res.pop()).to.match(/Success1!/);
@@ -84,11 +86,12 @@ describe('ActionCrawler', () => {
         test2: () => Promise.resolve('Success2!'),
       };
       const ac = new ActionCrawler(mockClient);
-      ac.registerAction('test2', client => client.test2());
-      ac.registerAction('test1', client => {
-        ac.enqueue('test2');
-        return client.test1();
-      });
+      ac
+        .registerAction('test2', client => client.test2())
+        .registerAction('test1', client => {
+          ac.enqueue('test2');
+          return client.test1();
+        });
       ac.enqueue('test1');
       return ac.runAsync().then(res => {
         expect(res.pop()).to.match(/Success2!/);
@@ -99,14 +102,18 @@ describe('ActionCrawler', () => {
     it('should throw an error when an action fails', () => {
       const mockClient = {
         test1: () => Promise.resolve('Success1!'),
-        test2: () => Promise.reject('Error!'),
+        test2: () => Promise.reject('Action Error!'),
       };
       const ac = new ActionCrawler(mockClient);
-      ac.registerAction('test1', client => client.test1());
-      ac.registerAction('test2', client => client.test2());
-      ac.enqueue('test1');
-      ac.enqueue('test2');
-      return ac.runAsync();
+      ac
+        .registerAction('test1', client => client.test1())
+        .registerAction('test2', client => client.test2());
+      ac.enqueue('test1').enqueue('test2');
+      return ac.runAsync().then(() => {
+        throw Error('Unexpected success!');
+      }).catch(err => {
+        expect(err.message).to.eql('Action Error!');
+      });
     });
   });
 });
