@@ -95,6 +95,19 @@ describe('ActionCrawler', () => {
         expect(res.pop()).to.match(/Success1!/);
       });
     });
+
+    it('should throw an error when an action fails', () => {
+      const mockClient = {
+        test1: () => Promise.resolve('Success1!'),
+        test2: () => Promise.reject('Error!'),
+      };
+      const ac = new ActionCrawler(mockClient);
+      ac.registerAction('test1', client => client.test1());
+      ac.registerAction('test2', client => client.test2());
+      ac.enqueue('test1');
+      ac.enqueue('test2');
+      return ac.runAsync();
+    });
   });
 });
 
