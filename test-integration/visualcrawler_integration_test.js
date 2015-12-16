@@ -40,7 +40,7 @@ describe('VisualCrawler', () => {
         const dataStats = fs.statSync(path.join(tmpDir, 'data.json'));
         expect(screenshotStats.isFile()).to.be.true;
         expect(dataStats.isFile()).to.be.true;
-        expect(screenshotStats.isFile()).to.be.gt(0);
+        expect(screenshotStats.size).to.be.gt(0);
         expect(dataStats.size).to.be.gt(0);
       });
     });
