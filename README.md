@@ -1,4 +1,4 @@
-A crawling API that generates visual sitemaps of target pages.
+A crawling API that generates visual sitemaps of target pages. It saves page screenshots and mappings from DOM nodes to bounding boxes in the screenshot.
 
 #### Output
 
