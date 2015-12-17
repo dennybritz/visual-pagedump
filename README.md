@@ -28,3 +28,26 @@ The goal is to generate a visual mapping from DOM nodes to the rendered screen. 
 ```
 
 Using the above, we can map each element to its position in the screenshot and reconstruct the DOM tree.
+
+#### Using with Docker
+
+```bash
+docker-compose up
+```
+
+This will start the API server and a (Firefox) Selenium node.
+
+#### API
+
+Here, I'm using `192.168.99.100` as the server IP. Adjust as needed.
+
+```bash
+curl -X POST http://192.168.99.100:3000/api/v1/dumpPage -H 'Content-Type: application/json' -d '
+{
+  "url": "https://www.google.com",
+  "options": {
+    "outputDir": "out/"
+  }
+}'
+
+```

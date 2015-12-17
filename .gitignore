@@ -1,3 +1,6 @@
+# application-specific
+out/
+
 ### Node ###
 # Logs
 logs
