@@ -13,7 +13,7 @@ The goal is to generate a visual mapping from DOM nodes to the rendered screen. 
 ```json
 {
   "id": 1805,
-  "parentId": 1801  
+  "parentId": 1801,
   "html": "<span class=\"el-weather__footer-temperature\"><span data-temptype=\"celsius\" celsius=\"15\" class=\"js-temp\">15</span>°</span>",
   "location": {
     "right": 303,
