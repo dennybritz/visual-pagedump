@@ -2,7 +2,6 @@
 
 const tmp = require('tmp');
 const fs = require('fs');
-const path = require('path');
 const webdriverio = require('webdriverio');
 const PageDumper = require('../lib/page_dumper');
 const expect = require('chai').expect;
