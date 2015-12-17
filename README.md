@@ -1,35 +1,35 @@
-A crawling API that generates visual sitemaps of target pages. It saves page screenshots and mappings from DOM nodes to bounding boxes in the screenshot.
+An API to create a visual-semantic mapping between HTML pages and DOM nodes.
 
-#### Output
 
-For each page, the API outputs in a new directory:
+### Output and Data Format
 
-- A full screenshot of the page, named `screenshot.png`
-- A full dump of all HTML element with visual mappings in a file called `data.json`.
+For each page we create:
 
-#### Data format
+- A screenshot of the page, named `screenshot.png`
+- A dump of all HTML element with their coordinates and sizes in a file called `data.json`.
 
-The goal is to generate a visual mapping from DOM nodes to the rendered screen. Each DOM element is serialized as follows:
+The goal is to generate a visual mapping from DOM nodes to the rendered screen. We can map each element to its position in the screenshot and also reconstruct the DOM tree.
 
 ```json
 {
-  "id": "265",
-  "parentId": "264",
-  "size": {
-    "width": 121,
-    "height": 17
-  },
+  "id": 1805,
+  "parentId": 1801  
+  "html": "<span class=\"el-weather__footer-temperature\"><span data-temptype=\"celsius\" celsius=\"15\" class=\"js-temp\">15</span>°</span>",
   "location": {
-    "x": 871,
-    "y": 512
+    "right": 303,
+    "top": 5907.0166015625,
+    "left": 264,
+    "bottom": 5945.0166015625
   },
-  "html": "<span class=\"_YFi\">Jetzt ansehen</span>"
+  "size": {
+    "width": 39,
+    "height": 38
+  }
 }
 ```
 
-Using the above, we can map each element to its position in the screenshot and reconstruct the DOM tree.
 
-#### Using with Docker
+### Using with Docker
 
 ```bash
 docker-compose up
@@ -37,9 +37,15 @@ docker-compose up
 
 This will start the API server and a (Firefox) Selenium node.
 
-#### API
+
+### API
 
 Here, I'm using `192.168.99.100` as the server IP. Adjust as needed.
+
+
+#### `POST /api/v1/dumpPage`
+
+Dumps data about a single page.
 
 ```bash
 curl -X POST http://192.168.99.100:3000/api/v1/dumpPage -H 'Content-Type: application/json' -d '
@@ -51,3 +57,15 @@ curl -X POST http://192.168.99.100:3000/api/v1/dumpPage -H 'Content-Type: applic
 }'
 
 ```
+
+```json
+{
+  "screenshotFile": "/usr/src/app/out/19Q6CfkO4Qvp3y/screenshot.png",
+  "dataFile": "/usr/src/app/out/19Q6CfkO4Qvp3y/data.json"
+}
+```
+
+
+#### `POST /api/v1/crawl`
+
+TODO
