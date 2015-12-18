@@ -12,6 +12,7 @@
   "author": "Denny Britz",
   "license": "ISC",
   "dependencies": {
+    "actioncrawler": "^0.1.0",
     "bluebird": "^3.0.6",
     "body-parser": "^1.14.2",
     "bunyan": "^1.5.1",
