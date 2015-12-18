@@ -25,7 +25,8 @@ describe('PageDumper', () => {
         expect(res.title).to.match(/Google/);
         expect(res.url).to.match(/google/);
         expect(res.elements.length).to.be.gt(0);
-        expect(res.elements[0]).to.have.all.keys(['id', 'parentId', 'size', 'location', 'html']);
+        expect(res.elements[0]).to.have.all.keys(
+          ['id', 'display', 'tag', 'parentId', 'size', 'location', 'html']);
       });
     });
   });
