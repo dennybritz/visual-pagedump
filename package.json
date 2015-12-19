@@ -1,7 +1,7 @@
 {
-  "name": "visualcrawler",
+  "name": "visual-pagedump",
   "version": "0.1.0",
-  "description": "Crawling API that generates visual sitemaps.",
+  "description": "An API to create visual-semantic mappings between web pages and DOM nodes.",
   "main": "app.js",
   "scripts": {
     "start": "node --harmony_destructuring server/server.js",
