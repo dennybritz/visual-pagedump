@@ -66,8 +66,3 @@ curl -X POST http://192.168.99.100:3000/api/v1/dumpPage -H 'Content-Type: applic
   "dataFile": "/usr/src/app/out/19Q6CfkO4Qvp3y/data.json"
 }
 ```
-
-
-#### `POST /api/v1/crawl`
-
-TODO
